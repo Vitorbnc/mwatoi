@@ -1,3 +1,4 @@
+from multiprocessing import connection
 import os
 import tarfile
 import shutil
@@ -6,7 +7,7 @@ import sqlite3
 req_file_list = {'bin': ['adb.exe', 'AdbWinApi.dll','AdbWinUsbApi.dll','LegacyWhatsApp.apk'],'.':['migrate.py']}
 iphone_backup_root_locs = [
     os.getenv('APPDATA')+'\\Apple Computer\\MobileSync\\Backup',
-    os.getenv('USERPROFILE')+'\\Apple\\MobileSync'
+    os.getenv('USERPROFILE')+'\\Apple\\MobileSync\\Backup'
 ]
 
 print('\nWhatsApp android to ios transferrer\n')
@@ -20,7 +21,12 @@ for dirname in req_file_list:
 
 use_android_backup = False
 
-if os.path.exists('out\\android.db'):
+if os.path.exists('extracted\\msgstore.db'):
+    print('Android backup file from external tool detected. Path: extracted\\msgstore.db')
+    use_android_backup = input('Do you want to use this backup? [y/n]: ').upper() == 'Y'
+    shutil.copyfile('extracted\\msgstore.db','out\\android.db')
+
+elif os.path.exists('out\\android.db'):
     print('Android backup file already exists. Path: out\\android.db')
     use_android_backup = input('Do you want to use the current backup? [y/n]: ').upper() == 'Y'
 
@@ -82,16 +88,16 @@ if not use_android_backup:
     shutil.rmtree('tmp')
     print('Stopping adb.')
     os.system('bin\\adb.exe kill-server')
-
-
     print('\nYou can now safely remove your android device.')
+    
 print('\nPlease follow below steps to restore whatsapp backup to your iphone:')
 print('\t1. Login into whatsapp with the same number in your iphone.')
-print('\t   If already logged in, script will preverse iphone chats also.')
+print('\t   If already logged in, script will preserve iphone chats also.')
+print('\t   Open whatsapp, go to settings and backup chats.')
 print('\n\t2. Disable \'Find My iPhone\' option in your iphone.')
 print('\n\t3. Create an unencrypted local backup using iTunes.')
 
-input('Press enter to conitnue...')
+input('Press enter to continue...')
 print('Looking for iphone backup.')
 
 root_loc_exists = False
@@ -114,6 +120,7 @@ elif len(dirnames)>1:
     iphone_backup_loc = input('Please enter backup folder path: ')
 else:
     iphone_backup_loc = os.path.join(iphone_backup_root_loc,dirnames[0])
+    print(f"Backup location: {iphone_backup_loc}")
 
 manifest_db_path = os.path.join(iphone_backup_loc,'Manifest.db')
 if not os.path.exists(manifest_db_path):
@@ -122,8 +129,10 @@ if not os.path.exists(manifest_db_path):
 
 print('Looking for whatsapp data in iphone backup.')
 manifest_db = sqlite3.connect(manifest_db_path)
+print(manifest_db.total_changes)
 
 chatstorage = list(manifest_db.execute("SELECT fileID FROM Files WHERE relativePath='ChatStorage.sqlite' AND domain='AppDomainGroup-group.net.whatsapp.WhatsApp.shared'"))
+print(f"Whatsapp data: {chatstorage}")
 if len(chatstorage)!=1:
     print('Error finding whatsapp data. Terminating!')
     exit(5)

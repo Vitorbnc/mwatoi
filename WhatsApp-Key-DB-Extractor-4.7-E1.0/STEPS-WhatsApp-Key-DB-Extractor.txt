@@ -1,0 +1,41 @@
+Detailed Instructions
+
+Thanks to everybody in this post, I finally made it in life, well, I mean... I managed to de-crypt the WA database as of today (29/02/2020, so it still works yey!!) after just a few hours of "playing" (not a funny game tho).
+Because I'm quite bored this morning, I feel the need to give a thorough list of instructions for the newcomers (a kind summary because many have already been given in this post):
+
+First, the "foreplay" steps, if you know what I mean ;) :
+
+    Enable "USB Debugging" in your phone
+    Verify you have the latest version of Java and the Android Debug Bridge Drivers in your PC
+    Download the .zip from this post
+    Extract it without changing the overall structure of the folder
+    Download WA 2.11.431 (like from android-apk.org)
+    Put it in the tmp folder replacing LegacyWhatsApp.apk
+
+
+Second, the feel like a hacker from Mr. Robot steps:
+
+    Launch WhatsAppKeyDBExtract.bat file
+    Input Y to reboot the device
+    Once rebooted, unlock it (you should not find your WA app anymore) and press any key in CW
+    Wait until the streamed install is done
+    Unlock again your phone
+    Prompted "WA has been updated" should be prompted in your phone, press continue
+    Search for WA in your phone and open it
+    (A new prompt in your phone will say it's an outdated version of WA press ok, if it doesnt appear don't worry)
+    Press the adjust date and you will be sent to a Date & Time page, keep it open
+    Press any key in CW
+    Select the option you prefer at the command window
+    Select fullback up in your phone (without entering any password)
+    Restore WA press any key
+    You MADE IT as well :highfive:
+
+
+Finally you should download the Whatsapp Viewer and use it to open the msgstor.db file
+I hope it helps and sorry for the bad jokes :p
+
+WA = Whatsapp
+CW = Command Window
+
+-------------------------------------------------------------
+Src: https://forum.xda-developers.com/t/tool-whatsapp-key-db-extractor-crypt6-12-non-root-updated-october-2016.2770982/page-29#post-81902381
