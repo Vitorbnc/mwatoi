@@ -52,7 +52,7 @@ This project was tested only in Windows.
 
 
 # Notes
-- Fully tested with Xperia XZ Premium (Android 9.0), Windows 10 x64, Python 3.10.2, JRE 8u331, iTunes 12.12.3.5 (from Microsoft Store)
+- Fully tested with Xperia XZ Premium (Android 9.0), Windows 10 x64, Python 3.10.2, JRE 8u331, iTunes 12.12.3.5 (from Microsoft Store), iPhone 11 Pro Max (iOS 15.3.1)
 - Change `iphone_backup_root_locs` in `main.py` to match your iTunes location if required
 - If a specific WhatsApp chat crashes the app when opening, try swiping over it and marking messages as 'read'.
 - Please make sure to take complete Google Drive backup before connecting your android device.
