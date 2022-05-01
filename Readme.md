@@ -1,6 +1,6 @@
 # About
 
-**mwatoi** is a python based project which can automatically extract whatsapp chats from android devices and copy it to iphone backup.
+**mwatoi** is a python based project which can automatically extract whatsapp chats from android devices and copy them to iphone backup.
 
 *Note:* It can't copy media files.
 
