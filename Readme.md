@@ -6,7 +6,7 @@
 
 This project was tested only in Windows.
 
-# Prerequisite
+# Prerequisites
 
 1. python3
 2. JRE
