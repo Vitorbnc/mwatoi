@@ -4,7 +4,7 @@
 
 *Note:* It can't copy media files.
 
-This project was tested only in Windows.
+This project was used successfully in Windows.
 
 # Prerequisites
 
